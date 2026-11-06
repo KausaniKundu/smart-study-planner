@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Study Planner</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+<h1>📚 Smart Study Planner</h1>
+<div class="actions no-print">
+<button id="btn-theme" class="ghost" title="Toggle dark mode">🌙</button>
+<button id="btn-regen">Regenerate schedule</button>
+</div>
+</header>
+ 
+<main class="layout">
+<!-- LEFT: input -->
+<aside class="col no-print">
+<section class="card">
+<h2>Add subject</h2>
+<form id="subject-form">
+<label>Subject
+<input id="name" type="text" maxlength="40" placeholder="e.g. Machine Learning" required>
+</label>
+<label>Exam date
+<input id="examDate" type="date" required>
+</label>
+<label>Difficulty
+<select id="difficulty">
+<option value="1">1 – Very easy</option>
+<option value="2">2 – Easy</option>
+<option value="3" selected>3 – Medium</option>
+<option value="4">4 – Hard</option>
+<option value="5">5 – Very hard</option>
+</select>
+</label>
+<button type="submit">Add subject</button>
+<p id="form-msg" class="msg" role="alert"></p>
+</form>
+</section>
+ 
+<section class="card">
+<h2>Settings</h2>
+<label>Study hours per day
+<input id="dailyHours" type="number" min="0.5" max="16" step="0.5" value="4">
+</label>
+</section>
+ 
+<section class="card">
+<h2>Subjects</h2>
+<ul id="subject-list" class="subject-list"></ul>
+</section>
+</aside>
+ 
+<!-- MIDDLE: schedule -->
+<section class="col">
+<div class="card">
+<h2>Today <span id="today-label" class="muted"></span></h2>
+<div id="today-tasks"></div>
+</div>
+ 
+<div id="missed-card" class="card warn" hidden>
+<h2>Missed sessions</h2>
+<p id="missed-summary" class="muted"></p>
+<div id="missed-tasks"></div>
+<button id="btn-reschedule" class="no-print">Reschedule missed hours</button>
+</div>
+ 
+<div class="card">
+<h2>Upcoming <span class="muted">(next 14 days)</span></h2>
+<div id="upcoming"></div>
+</div>
+</section>
+ 
+<!-- RIGHT: stats -->
+<aside class="col">
+<section class="card stat">
+<h2>Next exam</h2>
+<p id="countdown" class="big">–</p>
+<p id="countdown-sub" class="muted"></p>
+</section>
+ 
+<section class="card stat">
+<h2>Streak</h2>
+<p id="streak" class="big">0 days</p>
+<p class="muted">Finish all of today's sessions to keep it going.</p>
+</section>
+ 
+<section class="card">
+<h2>Progress</h2>
+<div id="overall-progress"></div>
+<div id="subject-progress"></div>
+</section>
+ 
+<section class="card no-print">
+<h2>Your data</h2>
+<div class="btn-row">
+<button id="btn-export" class="ghost">Export</button>
+<button id="btn-import" class="ghost">Import</button>
+<button id="btn-print" class="ghost">Print</button>
+<button id="btn-reset" class="ghost danger">Reset</button>
+</div>
+<input id="import-file" type="file" accept="application/json" hidden>
+<p class="muted small">Data is stored only in this browser. Export a backup now and then.</p>
+</section>
+</aside>
+</main>
+ 
+<script src="scheduler.js"></script>
+<script src="storage.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
+ 
